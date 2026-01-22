@@ -1,10 +1,16 @@
-# �६���� 䠩�� 
-*.tmp 
-*.temp 
-cache/ 
-tmp/ 
- 
-# ���� � ��娢�� 䠩�� 
-*.log 
-*.zip 
-*.tar.gz 
+﻿# Игнорируемые DVC файлы
+.dvc/tmp
+.dvc/cache
+
+# Временные файлы
+*.tmp
+*.temp
+*.cache
+
+# Логи
+*.log
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+desktop.ini

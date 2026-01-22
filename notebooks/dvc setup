@@ -1,0 +1,35 @@
+# Установите DVC если еще не установлен
+# !pip install dvc dvc-gdrive
+
+import os
+from pathlib import Path
+import json
+
+# Проверьте структуру данных
+data_dir = Path("data")
+print("Структура данных:")
+for root, dirs, files in os.walk(data_dir):
+    level = root.replace(str(data_dir), '').count(os.sep)
+    indent = ' ' * 2 * level
+    print(f'{indent}{os.path.basename(root)}/')
+    subindent = ' ' * 2 * (level + 1)
+    for file in files[:5]:  # покажем первые 5 файлов
+        print(f'{subindent}{file}')
+    if len(files) > 5:
+        print(f'{subindent}... и еще {len(files) - 5} файлов')
+
+# Инициализация DVC
+# !dvc init
+# !git add .dvc .dvcignore
+# !git commit -m "Initialize DVC"
+
+# Настройте удаленное хранилище (например, Google Drive)
+# !dvc remote add -d myremote gdrive://ваш_ид_папки_на_гугл_диске
+
+# Добавьте данные в DVC
+# !dvc add data/raw/swans/ data/processed/swans_dataset/
+# !git add data/raw/swans.dvc data/processed/swans_dataset.dvc .gitignore
+# !git commit -m "Add dataset with DVC"
+
+# Отправьте данные в удаленное хранилище
+# !dvc push
