@@ -1,10 +1,11 @@
-# Параметры по умолчанию 
-train: 
-  batch_size: 32 
-  epochs: 10 
-  learning_rate: 0.001 
-  optimizer: "adam" 
+# Parameters for swan classification project 
  
 data: 
-  test_size: 0.2 
-  random_state: 42 
+  num_classes: 6 
+  img_size: 224 
+  batch_size: 32 
+ 
+training: 
+  epochs: 25 
+  lr: 0.001 
+  patience: 5 

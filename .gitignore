@@ -2,35 +2,29 @@
 __pycache__/ 
 *.py[cod] 
 *$py.class 
+ 
 # Virtual environments 
 venv/ 
 .venv/ 
 .env/ 
-# DVC managed data 
-# Игнорируем содержимое data/, но НЕ .dvc файлы! 
-data/ 
-!data/raw/ 
-data/raw/swans/ 
-!data/raw/*.dvc 
-notebooks/data/ 
-!notebooks/data/processed/ 
-notebooks/data/processed/swans_dataset/ 
-!notebooks/data/processed/*.dvc 
-!notebooks/data/*.json 
-!notebooks/data/*.csv 
+ 
 # DVC internal 
+.dvc/ 
 .dvc/tmp/ 
-.dvc/cache/ 
+ 
+# Large data files (tracked by DVC) 
+data/raw/swans/*.jpg 
+data/processed/swans_dataset/*/*/*.jpg 
+ 
 # Jupyter 
 .ipynb_checkpoints/ 
+ 
 # IDE 
 .vscode/ 
 .idea/ 
 *.swp 
 *.swo 
-# Models 
-models/ 
-!models/.gitkeep 
+ 
 # System files 
 .DS_Store 
 Thumbs.db 
