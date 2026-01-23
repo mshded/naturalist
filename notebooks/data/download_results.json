@@ -1,0 +1,49 @@
+{
+  "total_downloaded": 90,
+  "per_species": {
+    "mute_swan": 15,
+    "black_swan": 15,
+    "whooper_swan": 15,
+    "black_necked_swan": 15,
+    "trumpeter_swan": 15,
+    "american_swan": 15
+  },
+  "species_info": {
+    "mute_swan": {
+      "id": 6921,
+      "latin_name": "Cygnus olor",
+      "common_name_ru": "Лебедь-шипун",
+      "common_name_en": "Mute Swan"
+    },
+    "black_swan": {
+      "id": 6914,
+      "latin_name": "Cygnus atratus",
+      "common_name_ru": "Чёрный лебедь",
+      "common_name_en": "Black Swan"
+    },
+    "whooper_swan": {
+      "id": 6916,
+      "latin_name": "Cygnus cygnus",
+      "common_name_ru": "Лебедь-кликун",
+      "common_name_en": "Whooper Swan"
+    },
+    "black_necked_swan": {
+      "id": 72789,
+      "latin_name": "Cygnus melancoryphus",
+      "common_name_ru": "Черношейный Лебедь",
+      "common_name_en": "Black-necked Swan"
+    },
+    "trumpeter_swan": {
+      "id": 6915,
+      "latin_name": "Cygnus buccinator",
+      "common_name_ru": "Лебедь-Трубач",
+      "common_name_en": "Trumpeter Swan"
+    },
+    "american_swan": {
+      "id": 6917,
+      "latin_name": "Cygnus columbianus",
+      "common_name_ru": "Американский Лебедь",
+      "common_name_en": "American Swan"
+    }
+  }
+}

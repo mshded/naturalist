@@ -1,0 +1,35 @@
+data:
+  num_classes: 6
+  img_size: 224
+  batch_size: 16  
+
+training:
+  epochs: 100
+  lr: 0.001
+  patience: 15    
+  min_epochs: 30
+  gradient_clip: 1.0
+
+model:
+  name: "efficientnet_b0"
+  dropout_rate: 0.7      
+  freeze_backbone: true
+
+optimizer:
+  name: "AdamW"
+  weight_decay: 0.01    
+
+loss:
+  label_smoothing: 0.2   
+
+scheduler:
+  name: "ReduceLROnPlateau"
+  patience: 5            
+  factor: 0.5
+  min_lr: 0.000001
+
+augmentation:
+  use_randaugment: true
+  num_ops: 3            
+  magnitude: 10         
+

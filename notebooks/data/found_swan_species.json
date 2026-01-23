@@ -1,0 +1,194 @@
+{
+  "6913": {
+    "name": "Cygnus",
+    "common_name": "True Swans",
+    "rank": "genus",
+    "matched_query": "swan"
+  },
+  "7014": {
+    "name": "Anser cygnoides",
+    "common_name": "Swan Goose",
+    "rank": "species",
+    "matched_query": "swan"
+  },
+  "941713": {
+    "name": "Salvia yangii",
+    "common_name": "Swanleaf Clouding Sage",
+    "rank": "species",
+    "matched_query": "swan"
+  },
+  "209357": {
+    "name": "Agave attenuata",
+    "common_name": "Swan-neck Agave",
+    "rank": "species",
+    "matched_query": "swan"
+  },
+  "362811": {
+    "name": "Sphrageidus similis",
+    "common_name": "Swan Moth",
+    "rank": "species",
+    "matched_query": "swan"
+  },
+  "6912": {
+    "name": "Anatidae",
+    "common_name": "Ducks, Geese, and Swans",
+    "rank": "family",
+    "matched_query": "swan"
+  },
+  "84998": {
+    "name": "Carex swanii",
+    "common_name": "Swan's sedge",
+    "rank": "species",
+    "matched_query": "swan"
+  },
+  "1488680": {
+    "name": "Chabulina onychinalis",
+    "common_name": "Swan plant flower moth",
+    "rank": "species",
+    "matched_query": "swan"
+  },
+  "151517": {
+    "name": "Anodonta cygnea",
+    "common_name": "Swan Mussel",
+    "rank": "species",
+    "matched_query": "swan"
+  },
+  "386078": {
+    "name": "Arocatus rusticus",
+    "common_name": "Swan plant seed bug",
+    "rank": "species",
+    "matched_query": "swan"
+  },
+  "55188": {
+    "name": "Aristolochia erecta",
+    "common_name": "Swanflower",
+    "rank": "species",
+    "matched_query": "swan"
+  },
+  "357984": {
+    "name": "Elachista argentella",
+    "common_name": "swan-feather dwarf",
+    "rank": "species",
+    "matched_query": "swan"
+  },
+  "415333": {
+    "name": "Hypocalymma robustum",
+    "common_name": "Swan River Myrtle",
+    "rank": "species",
+    "matched_query": "swan"
+  },
+  "632145": {
+    "name": "Anser cygnoides × Branta canadensis",
+    "common_name": "Swan × Canada Goose",
+    "rank": "hybrid",
+    "matched_query": "swan"
+  },
+  "6914": {
+    "name": "Cygnus atratus",
+    "common_name": "Black Swan",
+    "rank": "species",
+    "matched_query": "cygnus"
+  },
+  "6921": {
+    "name": "Cygnus olor",
+    "common_name": "Mute Swan",
+    "rank": "species",
+    "matched_query": "cygnus"
+  },
+  "6915": {
+    "name": "Cygnus buccinator",
+    "common_name": "Trumpeter Swan",
+    "rank": "species",
+    "matched_query": "cygnus"
+  },
+  "6917": {
+    "name": "Cygnus columbianus",
+    "common_name": "Tundra Swan",
+    "rank": "species",
+    "matched_query": "cygnus"
+  },
+  "6916": {
+    "name": "Cygnus cygnus",
+    "common_name": "Whooper Swan",
+    "rank": "species",
+    "matched_query": "cygnus"
+  },
+  "72789": {
+    "name": "Cygnus melancoryphus",
+    "common_name": "Black-necked Swan",
+    "rank": "species",
+    "matched_query": "cygnus"
+  },
+  "196538": {
+    "name": "Cygnus columbianus bewickii",
+    "common_name": "Bewick's Swan",
+    "rank": "subspecies",
+    "matched_query": "cygnus"
+  },
+  "512829": {
+    "name": "Cygnus columbianus columbianus",
+    "common_name": "Whistling Swan",
+    "rank": "subspecies",
+    "matched_query": "cygnus"
+  },
+  "1428037": {
+    "name": "Cygnus olor × cygnus",
+    "common_name": "Mute × Whooper Swan",
+    "rank": "hybrid",
+    "matched_query": "cygnus"
+  },
+  "533220": {
+    "name": "Cygnus buccinator × cygnus",
+    "common_name": "Trumpeter × Whooper Swan",
+    "rank": "hybrid",
+    "matched_query": "cygnus"
+  },
+  "533219": {
+    "name": "Cygnus buccinator × columbianus",
+    "common_name": "Trumpeter × Tundra Swan",
+    "rank": "hybrid",
+    "matched_query": "cygnus"
+  },
+  "1576278": {
+    "name": "Cygnus atratus × olor",
+    "common_name": "Black × Mute Swan",
+    "rank": "hybrid",
+    "matched_query": "cygnus"
+  },
+  "533217": {
+    "name": "Cygnus buccinator × olor",
+    "common_name": "Trumpeter × Mute Swan",
+    "rank": "hybrid",
+    "matched_query": "cygnus"
+  },
+  "533218": {
+    "name": "Cygnus columbianus columbianus × bewickii",
+    "common_name": "Whistling × Bewick's Swan",
+    "rank": "infrahybrid",
+    "matched_query": "cygnus"
+  },
+  "774218": {
+    "name": "Cygnus equitum",
+    "common_name": "Dwarf Swan",
+    "rank": "species",
+    "matched_query": "cygnus"
+  },
+  "850625": {
+    "name": "Cygnus sumnerensis",
+    "common_name": "New Zealand swan",
+    "rank": "species",
+    "matched_query": "cygnus"
+  },
+  "774217": {
+    "name": "Cygnus falconeri",
+    "common_name": "Giant Swan",
+    "rank": "species",
+    "matched_query": "cygnus"
+  },
+  "108354": {
+    "name": "Panulirus cygnus",
+    "common_name": "Western Rock Lobster",
+    "rank": "species",
+    "matched_query": "cygnus"
+  }
+}

@@ -1,0 +1,95 @@
+schema: '2.0'
+stages:
+  train_model:
+    cmd: python src/train.py --config params.yaml
+    deps:
+    - path: notebooks/data/processed
+      hash: md5
+      md5: 0f4ad19be8859fabf3120c4c340c48e9.dir
+      size: 35759354
+      nfiles: 306
+    - path: src/data.py
+      hash: md5
+      md5: de57d2af4ccc5fa7c448e977449244b1
+      size: 3947
+    - path: src/models.py
+      hash: md5
+      md5: 1eef9cfd628e9115e32d3616ae1ab03b
+      size: 3921
+    - path: src/train.py
+      hash: md5
+      md5: 9c4522d10af8b2ef65fa24ec3bcaa695
+      size: 7179
+    - path: src/utils.py
+      hash: md5
+      md5: 429c611b25e9620f20d35e1ba3a2be53
+      size: 4382
+    params:
+      params.yaml:
+        augmentation:
+          use_randaugment: false
+        data:
+          num_classes: 6
+          img_size: 224
+          batch_size: 16
+        loss:
+          label_smoothing: 0.05
+        model:
+          name: mobilenet_v2
+          dropout_rate: 0.3
+          freeze_backbone: true
+        optimizer:
+          name: AdamW
+          weight_decay: 0.001
+        scheduler:
+          name: CosineAnnealingLR
+          T_max: 80
+        training:
+          epochs: 80
+          lr: 0.0003
+          patience: 15
+          min_epochs: 20
+          gradient_clip: 1.0
+          unfreeze_epoch: 20
+    outs:
+    - path: metrics/train_metrics.json
+      hash: md5
+      md5: 283930c66aabfa6e9e4b5eac5e8b4459
+      size: 242
+    - path: models/best_model.pth
+      hash: md5
+      md5: fefeb2de28329f2fa614dca331730b85
+      size: 17074212
+    - path: models/training_history.pth
+      hash: md5
+      md5: 5a202f7b342e75cb6b803f3762a50882
+      size: 4323
+    - path: plots/training_history.png
+      hash: md5
+      md5: 283dd974e0fdb69ff2ce9b75f85026fe
+      size: 287301
+  evaluate:
+    cmd: python src/evaluate.py --model models/best_model.pth
+    deps:
+    - path: models/best_model.pth
+      hash: md5
+      md5: fefeb2de28329f2fa614dca331730b85
+      size: 17074212
+    - path: notebooks/data/processed/swans_dataset
+      hash: md5
+      md5: ac22667b2a1abaf2b74c62d2497071ee.dir
+      size: 35759221
+      nfiles: 304
+    - path: src/evaluate.py
+      hash: md5
+      md5: 959a58e4a9a248925aca999544e6debf
+      size: 3150
+    outs:
+    - path: metrics/evaluation.json
+      hash: md5
+      md5: 24c00282e4956c7429e4d3692aafb807
+      size: 1941
+    - path: plots/confusion_matrix.png
+      hash: md5
+      md5: 22314c94a36e991894e80ba64ea54277
+      size: 171187
