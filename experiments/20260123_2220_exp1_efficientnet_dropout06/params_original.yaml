@@ -1,0 +1,31 @@
+data:
+  num_classes: 6
+  img_size: 224
+  batch_size: 16  
+
+training:
+  epochs: 80
+  lr: 0.0003
+  patience: 15
+  min_epochs: 20
+  gradient_clip: 1.0
+  unfreeze_epoch: 20
+
+model:
+  name: "mobilenet_v2"
+  dropout_rate: 0.3
+  freeze_backbone: true
+
+optimizer:
+  name: "AdamW"
+  weight_decay: 0.001
+
+scheduler:
+  name: "CosineAnnealingLR"
+  T_max: 80
+
+loss:
+  label_smoothing: 0.05
+
+augmentation:
+  use_randaugment: false

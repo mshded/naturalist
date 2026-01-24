@@ -1,0 +1,27 @@
+augmentation:
+  magnitude: 9
+  num_ops: 2
+  use_randaugment: true
+data:
+  batch_size: 16
+  img_size: 224
+  num_classes: 6
+loss:
+  label_smoothing: 0.1
+model:
+  dropout_rate: 0.7
+  freeze_backbone: true
+  name: mobilenet_v2
+optimizer:
+  name: AdamW
+  weight_decay: 0.01
+scheduler:
+  T_max: 80
+  name: CosineAnnealingLR
+training:
+  epochs: 100
+  gradient_clip: 1.0
+  lr: 0.00015
+  min_epochs: 20
+  patience: 15
+  unfreeze_epoch: 35

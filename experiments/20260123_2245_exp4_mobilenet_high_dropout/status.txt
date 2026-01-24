@@ -1,0 +1,10 @@
+Статус: ❌ ОШИБКА DVC
+Эксперимент: 20260123_2245_exp4_mobilenet_high_dropout
+Начало: 2026-01-23 23:06:00
+Изменения параметров: {
+  "model.name": "mobilenet_v2",
+  "model.dropout_rate": 0.7,
+  "training.lr": 3e-05,
+  "training.epochs": 80,
+  "optimizer.weight_decay": 0.01
+}

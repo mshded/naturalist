@@ -9,9 +9,11 @@ data:
 loss:
   label_smoothing: 0.1
 model:
-  dropout_rate: 0.7
+  dropout_rate: 0.3
   freeze_backbone: true
-  name: mobilenet_v2
+  name: "google/vit-base-patch16-224-in21k"
+  from_huggingface: true
+  pretrained: true
 optimizer:
   name: AdamW
   weight_decay: 0.01
@@ -19,9 +21,9 @@ scheduler:
   T_max: 80
   name: CosineAnnealingLR
 training:
-  epochs: 100
+  epochs: 50
   gradient_clip: 1.0
-  lr: 0.00015
+  lr: 0.00005
   min_epochs: 20
   patience: 15
-  unfreeze_epoch: 35
+  unfreeze_epoch: 10

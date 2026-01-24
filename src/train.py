@@ -36,12 +36,25 @@ def main(config_path='params.yaml'):
 
     train_loader, val_loader, test_loader, species_names = get_dataloaders(params)
 
-    model = SwanClassifier(
-        num_classes=params['data']['num_classes'],
-        model_name=params['model']['name'],
-        dropout_rate=params['model']['dropout_rate'],
-        freeze_backbone=params['model']['freeze_backbone']
-    ).to(device)
+    if params['model'].get('from_huggingface', False):
+        from models import SwanClassifierHF
+        model = SwanClassifierHF(
+            num_classes=params['data']['num_classes'],
+            model_name=params['model']['name'],
+            dropout_rate=params['model']['dropout_rate'],
+            freeze_backbone=params['model']['freeze_backbone'],
+            from_huggingface=True
+        )
+    else:
+        from models import SwanClassifier
+        model = SwanClassifier(
+            num_classes=params['data']['num_classes'],
+            model_name=params['model']['name'],
+            dropout_rate=params['model']['dropout_rate'],
+            freeze_backbone=params['model']['freeze_backbone']
+        )
+    
+    model = model.to(device)
 
     criterion = nn.CrossEntropyLoss(
         label_smoothing=params['loss']['label_smoothing']
@@ -51,14 +64,24 @@ def main(config_path='params.yaml'):
 
     # optimizer
     if params['optimizer']['name'] == 'AdamW':
+        # Собираем параметры backbone
+        backbone_params = []
+        classifier_params = []
+        
+        for name, param in model.named_parameters():
+            if 'classifier' in name or 'fc' in name:
+                classifier_params.append(param)
+            else:
+                backbone_params.append(param)
+        
         optimizer = optim.AdamW(
             [
                 {
-                    "params": model.backbone.features.parameters(),
+                    "params": backbone_params,
                     "lr": lr * 0.1
                 },
                 {
-                    "params": model.backbone.classifier.parameters(),
+                    "params": classifier_params,
                     "lr": lr
                 }
             ],
@@ -110,10 +133,9 @@ def main(config_path='params.yaml'):
 
     for epoch in range(params['training']['epochs']):
         print(f"\nEpoch {epoch + 1}/{params['training']['epochs']}")
-
+        
         # fine-tuning
         if epoch == params['training']['unfreeze_epoch']:
-            print("🔓 Unfreezing backbone for fine-tuning")
 
             model.unfreeze_backbone()
 

@@ -94,3 +94,55 @@ class SwanClassifier(nn.Module):
         else:
             for param in self.backbone.classifier.parameters():
                 param.requires_grad = True
+
+class SwanClassifierHF(nn.Module):
+    def __init__(self, num_classes=6, model_name='google/vit-base-patch16-224', 
+                 dropout_rate=0.5, freeze_backbone=True, from_huggingface=True):
+        super().__init__()
+        self.model_name = model_name
+        self.from_huggingface = from_huggingface
+        
+        if from_huggingface:
+            # Загружаем модель из Hugging Face
+            self.model = AutoModelForImageClassification.from_pretrained(
+                model_name,
+                num_labels=num_classes,
+                ignore_mismatched_sizes=True,
+                id2label={i: f"class_{i}" for i in range(num_classes)},
+                label2id={f"class_{i}": i for i in range(num_classes)}
+            )
+            
+            # Заморозка backbone
+            if freeze_backbone:
+                for name, param in self.model.named_parameters():
+                    if 'classifier' not in name and 'fc' not in name:
+                        param.requires_grad = False
+                        
+            # Сохраняем image processor для трансформаций
+            self.processor = AutoImageProcessor.from_pretrained(model_name)
+                
+    def forward(self, x):
+        if self.from_huggingface:
+            # Для HF моделей
+            outputs = self.model(x)
+            return outputs.logits
+    
+    def unfreeze_backbone(self, unfreeze_all=False):
+        if self.from_huggingface:
+            if unfreeze_all:
+                for param in self.model.parameters():
+                    param.requires_grad = True
+            else:
+                # Размораживаем только последние слои
+                for name, param in self.model.named_parameters():
+                    if 'encoder.layer' in name:
+                        # Размораживаем последние N слоев encoder
+                        layer_num = int(name.split('.')[3])
+                        if layer_num >= 8:  # Последние 4 слоя из 12
+                            param.requires_grad = True
+    
+    def freeze_backbone(self):
+        if self.from_huggingface:
+            for name, param in self.model.named_parameters():
+                if 'classifier' not in name:
+                    param.requires_grad = False

@@ -1,0 +1,9 @@
+Статус: ❌ ОШИБКА DVC
+Эксперимент: 20260123_2244_exp3_resnet_small_lr
+Начало: 2026-01-23 22:44:25
+Изменения параметров: {
+  "model.name": "resnet18",
+  "training.lr": 3e-05,
+  "training.epochs": 150,
+  "training.unfreeze_epoch": 40
+}

@@ -1,0 +1,11 @@
+Статус: ❌ ОШИБКА DVC
+Эксперимент: 20260123_2232_exp2_mobilenet_aug
+Начало: 2026-01-23 22:43:13
+Изменения параметров: {
+  "model.name": "mobilenet_v2",
+  "model.dropout_rate": 0.5,
+  "augmentation.use_randaugment": true,
+  "augmentation.num_ops": 2,
+  "augmentation.magnitude": 9,
+  "training.epochs": 120
+}

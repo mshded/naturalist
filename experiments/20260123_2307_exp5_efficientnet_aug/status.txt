@@ -1,0 +1,12 @@
+Статус: ❌ ОШИБКА DVC
+Эксперимент: 20260123_2307_exp5_efficientnet_aug
+Начало: 2026-01-23 23:28:11
+Изменения параметров: {
+  "model.name": "efficientnet_b0",
+  "model.dropout_rate": 0.4,
+  "training.lr": 0.0001,
+  "training.epochs": 100,
+  "augmentation.use_randaugment": true,
+  "augmentation.num_ops": 3,
+  "augmentation.magnitude": 12
+}

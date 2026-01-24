@@ -1,0 +1,35 @@
+stages:
+  train_model:
+    cmd: python src/train.py --config params.yaml
+    deps:
+      - notebooks/data/processed
+      - src/train.py
+      - src/models.py
+      - src/data.py
+      - src/utils.py
+    params:
+      - data
+      - training
+      - model
+      - optimizer
+      - loss
+      - scheduler
+      - augmentation
+    outs:
+      - models/best_model.pth
+      - models/training_history.pth
+      - plots/training_history.png  
+      - metrics/train_metrics.json  
+
+  evaluate:
+    cmd: python src/evaluate.py --model models/best_model.pth
+    deps:
+      - src/evaluate.py
+      - models/best_model.pth
+      - notebooks/data/processed/swans_dataset
+    metrics:
+      - metrics/evaluation.json:
+          cache: false
+    plots:
+      - plots/confusion_matrix.png:
+          cache: false

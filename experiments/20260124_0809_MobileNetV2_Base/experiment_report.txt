@@ -1,0 +1,221 @@
+============================================================
+ОТЧЕТ ПО ЭКСПЕРИМЕНТУ: 20260124_0809_MobileNetV2_Base
+============================================================
+
+Модель: mobilenet_v2
+Статус: ✅ УСПЕХ | Точность: 64.44% | Время: 51.4 мин
+Время запуска: 2026-01-24 09:01:19
+Длительность: 51.4 минут
+
+ПАРАМЕТРЫ ЭКСПЕРИМЕНТА:
+{
+  "model.name": "mobilenet_v2",
+  "model.dropout_rate": 0.3,
+  "training.lr": 0.0003,
+  "training.epochs": 80,
+  "training.unfreeze_epoch": 20,
+  "optimizer.weight_decay": 0.001
+}
+
+ЛОГИ ОБУЧЕНИЯ (последние 200 строк):
+----------------------------------------
+  Batch [10/14], Loss: 0.9917
+Epoch  43/80 | Train Acc: 76.19% | Val Acc: 60.00% | LR backbone: 1.55e-06 | LR classifier: 1.55e-04
+
+Epoch 44/80
+  Batch [5/14], Loss: 0.8225
+  Batch [10/14], Loss: 0.7173
+Epoch  44/80 | Train Acc: 73.33% | Val Acc: 57.78% | LR backbone: 1.48e-06 | LR classifier: 1.48e-04
+
+Epoch 45/80
+  Batch [5/14], Loss: 0.6539
+  Batch [10/14], Loss: 1.2318
+Epoch  45/80 | Train Acc: 77.14% | Val Acc: 60.00% | LR backbone: 1.41e-06 | LR classifier: 1.41e-04
+
+Epoch 46/80
+  Batch [5/14], Loss: 1.5583
+  Batch [10/14], Loss: 0.6408
+Epoch  46/80 | Train Acc: 74.76% | Val Acc: 57.78% | LR backbone: 1.35e-06 | LR classifier: 1.35e-04
+
+Epoch 47/80
+  Batch [5/14], Loss: 0.8256
+  Batch [10/14], Loss: 1.2415
+Epoch  47/80 | Train Acc: 74.76% | Val Acc: 60.00% | LR backbone: 1.28e-06 | LR classifier: 1.28e-04
+
+Epoch 48/80
+  Batch [5/14], Loss: 0.5785
+  Batch [10/14], Loss: 1.1075
+Epoch  48/80 | Train Acc: 78.57% | Val Acc: 55.56% | LR backbone: 1.21e-06 | LR classifier: 1.21e-04
+
+Epoch 49/80
+  Batch [5/14], Loss: 0.8972
+  Batch [10/14], Loss: 0.7364
+Epoch  49/80 | Train Acc: 71.43% | Val Acc: 60.00% | LR backbone: 1.15e-06 | LR classifier: 1.15e-04
+
+Epoch 50/80
+  Batch [5/14], Loss: 0.6343
+  Batch [10/14], Loss: 0.7087
+Epoch  50/80 | Train Acc: 74.76% | Val Acc: 62.22% | LR backbone: 1.08e-06 | LR classifier: 1.08e-04
+
+Epoch 51/80
+  Batch [5/14], Loss: 0.7172
+  Batch [10/14], Loss: 0.6972
+Epoch  51/80 | Train Acc: 79.05% | Val Acc: 62.22% | LR backbone: 1.02e-06 | LR classifier: 1.02e-04
+
+Epoch 52/80
+  Batch [5/14], Loss: 0.7394
+  Batch [10/14], Loss: 0.9995
+Epoch  52/80 | Train Acc: 76.19% | Val Acc: 62.22% | LR backbone: 9.60e-07 | LR classifier: 9.60e-05
+
+Epoch 53/80
+  Batch [5/14], Loss: 1.0326
+  Batch [10/14], Loss: 0.7117
+Epoch  53/80 | Train Acc: 69.52% | Val Acc: 60.00% | LR backbone: 8.99e-07 | LR classifier: 8.99e-05
+
+Epoch 54/80
+  Batch [5/14], Loss: 0.7123
+  Batch [10/14], Loss: 0.6007
+Epoch  54/80 | Train Acc: 76.67% | Val Acc: 57.78% | LR backbone: 8.39e-07 | LR classifier: 8.39e-05
+
+Epoch 55/80
+  Batch [5/14], Loss: 1.0782
+  Batch [10/14], Loss: 0.9388
+Epoch  55/80 | Train Acc: 71.90% | Val Acc: 60.00% | LR backbone: 7.81e-07 | LR classifier: 7.81e-05
+
+Epoch 56/80
+  Batch [5/14], Loss: 0.7739
+  Batch [10/14], Loss: 0.9347
+Epoch  56/80 | Train Acc: 70.00% | Val Acc: 60.00% | LR backbone: 7.24e-07 | LR classifier: 7.24e-05
+
+Epoch 57/80
+  Batch [5/14], Loss: 0.7836
+  Batch [10/14], Loss: 1.2567
+Epoch  57/80 | Train Acc: 71.43% | Val Acc: 57.78% | LR backbone: 6.69e-07 | LR classifier: 6.69e-05
+
+Epoch 58/80
+  Batch [5/14], Loss: 0.6822
+  Batch [10/14], Loss: 0.5577
+Epoch  58/80 | Train Acc: 76.19% | Val Acc: 57.78% | LR backbone: 6.16e-07 | LR classifier: 6.16e-05
+
+Epoch 59/80
+  Batch [5/14], Loss: 0.6568
+  Batch [10/14], Loss: 1.0851
+Epoch  59/80 | Train Acc: 71.43% | Val Acc: 57.78% | LR backbone: 5.64e-07 | LR classifier: 5.64e-05
+
+Epoch 60/80
+  Batch [5/14], Loss: 1.0916
+  Batch [10/14], Loss: 0.8325
+Epoch  60/80 | Train Acc: 73.33% | Val Acc: 60.00% | LR backbone: 5.15e-07 | LR classifier: 5.15e-05
+
+Epoch 61/80
+  Batch [5/14], Loss: 0.7625
+  Batch [10/14], Loss: 0.8956
+Epoch  61/80 | Train Acc: 72.86% | Val Acc: 62.22% | LR backbone: 4.67e-07 | LR classifier: 4.67e-05
+
+Epoch 62/80
+  Batch [5/14], Loss: 0.6210
+  Batch [10/14], Loss: 1.0979
+Epoch  62/80 | Train Acc: 74.29% | Val Acc: 57.78% | LR backbone: 4.21e-07 | LR classifier: 4.21e-05
+
+Epoch 63/80
+  Batch [5/14], Loss: 0.8644
+  Batch [10/14], Loss: 1.0477
+Epoch  63/80 | Train Acc: 76.19% | Val Acc: 55.56% | LR backbone: 3.77e-07 | LR classifier: 3.77e-05
+
+Epoch 64/80
+  Batch [5/14], Loss: 1.0600
+  Batch [10/14], Loss: 0.9175
+Epoch  64/80 | Train Acc: 71.43% | Val Acc: 62.22% | LR backbone: 3.36e-07 | LR classifier: 3.36e-05
+
+Epoch 65/80
+  Batch [5/14], Loss: 0.7559
+  Batch [10/14], Loss: 0.7223
+Epoch  65/80 | Train Acc: 76.67% | Val Acc: 60.00% | LR backbone: 2.96e-07 | LR classifier: 2.96e-05
+
+Epoch 66/80
+  Batch [5/14], Loss: 0.6864
+  Batch [10/14], Loss: 0.8283
+Epoch  66/80 | Train Acc: 80.48% | Val Acc: 62.22% | LR backbone: 2.59e-07 | LR classifier: 2.59e-05
+
+Epoch 67/80
+  Batch [5/14], Loss: 0.7718
+  Batch [10/14], Loss: 0.9620
+Epoch  67/80 | Train Acc: 78.10% | Val Acc: 60.00% | LR backbone: 2.24e-07 | LR classifier: 2.24e-05
+
+Epoch 68/80
+  Batch [5/14], Loss: 1.1462
+  Batch [10/14], Loss: 0.6617
+Epoch  68/80 | Train Acc: 75.71% | Val Acc: 57.78% | LR backbone: 1.92e-07 | LR classifier: 1.92e-05
+
+Epoch 69/80
+  Batch [5/14], Loss: 0.8017
+  Batch [10/14], Loss: 0.9632
+Epoch  69/80 | Train Acc: 73.81% | Val Acc: 55.56% | LR backbone: 1.61e-07 | LR classifier: 1.61e-05
+
+Epoch 70/80
+  Batch [5/14], Loss: 1.1707
+  Batch [10/14], Loss: 1.1812
+Epoch  70/80 | Train Acc: 76.67% | Val Acc: 57.78% | LR backbone: 1.34e-07 | LR classifier: 1.34e-05
+
+Epoch 71/80
+  Batch [5/14], Loss: 0.5551
+  Batch [10/14], Loss: 0.7358
+Epoch  71/80 | Train Acc: 78.10% | Val Acc: 55.56% | LR backbone: 1.09e-07 | LR classifier: 1.09e-05
+
+Epoch 72/80
+  Batch [5/14], Loss: 1.0023
+  Batch [10/14], Loss: 0.7010
+Epoch  72/80 | Train Acc: 73.33% | Val Acc: 57.78% | LR backbone: 8.60e-08 | LR classifier: 8.60e-06
+
+Epoch 73/80
+  Batch [5/14], Loss: 1.2452
+  Batch [10/14], Loss: 0.8361
+Epoch  73/80 | Train Acc: 73.33% | Val Acc: 57.78% | LR backbone: 6.60e-08 | LR classifier: 6.60e-06
+
+Epoch 74/80
+  Batch [5/14], Loss: 0.9008
+  Batch [10/14], Loss: 0.8588
+Epoch  74/80 | Train Acc: 73.81% | Val Acc: 62.22% | LR backbone: 4.86e-08 | LR classifier: 4.86e-06
+
+Epoch 75/80
+  Batch [5/14], Loss: 0.5797
+  Batch [10/14], Loss: 1.2220
+Epoch  75/80 | Train Acc: 76.67% | Val Acc: 57.78% | LR backbone: 3.38e-08 | LR classifier: 3.38e-06
+
+Epoch 76/80
+  Batch [5/14], Loss: 0.7798
+  Batch [10/14], Loss: 1.5313
+Epoch  76/80 | Train Acc: 68.10% | Val Acc: 62.22% | LR backbone: 2.16e-08 | LR classifier: 2.16e-06
+
+Epoch 77/80
+  Batch [5/14], Loss: 1.1152
+  Batch [10/14], Loss: 0.5923
+Epoch  77/80 | Train Acc: 77.62% | Val Acc: 55.56% | LR backbone: 1.22e-08 | LR classifier: 1.22e-06
+
+Epoch 78/80
+  Batch [5/14], Loss: 0.8526
+  Batch [10/14], Loss: 0.8747
+Epoch  78/80 | Train Acc: 76.19% | Val Acc: 60.00% | LR backbone: 5.42e-09 | LR classifier: 5.42e-07
+
+Epoch 79/80
+  Batch [5/14], Loss: 1.0053
+  Batch [10/14], Loss: 0.6287
+Epoch  79/80 | Train Acc: 73.33% | Val Acc: 57.78% | LR backbone: 1.35e-09 | LR classifier: 1.35e-07
+
+Epoch 80/80
+  Batch [5/14], Loss: 0.7787
+  Batch [10/14], Loss: 0.8248
+Epoch  80/80 | Train Acc: 71.43% | Val Acc: 55.56% | LR backbone: 0.00e+00 | LR classifier: 0.00e+00
+
+Лучшая точность на валидации: 64.44%
+Updating lock file 'dvc.lock'
+
+To track the changes with git, run:
+
+	git add dvc.lock
+
+To enable auto staging, run:
+
+	dvc config core.autostage true
+Use `dvc push` to send your updates to remote storage.
+

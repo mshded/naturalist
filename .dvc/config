@@ -1,4 +1,4 @@
 [core]
     remote = myremote
 ['remote "myremote"']
-    url = C:\Users\Manya\dvc_storage
+    url = C:\Users\Manya\Project_Data
