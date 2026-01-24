@@ -10,16 +10,16 @@ stages:
       nfiles: 306
     - path: src/data.py
       hash: md5
-      md5: de57d2af4ccc5fa7c448e977449244b1
-      size: 3947
+      md5: 39013d3baaf198d302ff3b19d19b56a6
+      size: 3705
     - path: src/models.py
       hash: md5
-      md5: 1eef9cfd628e9115e32d3616ae1ab03b
-      size: 3921
+      md5: 3b953a8466c7d8aeec72b13ba29bcea0
+      size: 6411
     - path: src/train.py
       hash: md5
-      md5: 4c84e18e45f3912929d223e12fa34218
-      size: 7443
+      md5: 045c843c78e85dd8795bd1156f3ecb8e
+      size: 5995
     - path: src/utils.py
       hash: md5
       md5: 429c611b25e9620f20d35e1ba3a2be53
@@ -27,56 +27,57 @@ stages:
     params:
       params.yaml:
         augmentation:
-          magnitude: 12
-          num_ops: 3
-          use_randaugment: true
+          magnitude: 9
+          num_ops: 2
+          use_randaugment: false
         data:
-          batch_size: 16
+          batch_size: 8
           img_size: 224
           num_classes: 6
         loss:
-          label_smoothing: 0.05
+          label_smoothing: 0.1
         model:
-          dropout_rate: 0.3
+          name: efficientnet_b0
+          from_huggingface: false
           freeze_backbone: true
-          name: mobilenet_v2
+          dropout_rate: 0.4
         optimizer:
           name: AdamW
-          weight_decay: 0.001
+          weight_decay: 0.01
         scheduler:
           T_max: 80
           name: CosineAnnealingLR
         training:
-          epochs: 80
+          epochs: 50
           gradient_clip: 1.0
           lr: 0.0003
-          min_epochs: 20
-          patience: 15
-          unfreeze_epoch: 20
+          unfreeze_epoch: 5
+          patience: 10
+          min_epochs: 15
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: ac6697d41ff0c6e0147e9dbcd36ee395
-      size: 255
+      md5: 1d8987b3c06ba914d765a6069907ab79
+      size: 229
     - path: models/best_model.pth
       hash: md5
-      md5: 5bf572d3aff4dcfdfc394401d6965d12
-      size: 34992568
+      md5: 1d33a6681519c740683157b04963f761
+      size: 56495965
     - path: models/training_history.pth
       hash: md5
-      md5: f67feb299df51db8a549543ca035bef2
-      size: 4323
+      md5: e0cf65dd303ab2834632721263fc7745
+      size: 2339
     - path: plots/training_history.png
       hash: md5
-      md5: 6d46088645638efb5f63bf588512b1b5
-      size: 311524
+      md5: 509d52887b34c663d7cd6fd1580c44c7
+      size: 236370
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:
     - path: models/best_model.pth
       hash: md5
-      md5: 5bf572d3aff4dcfdfc394401d6965d12
-      size: 34992568
+      md5: 1d33a6681519c740683157b04963f761
+      size: 56495965
     - path: notebooks/data/processed/swans_dataset
       hash: md5
       md5: ac22667b2a1abaf2b74c62d2497071ee.dir
@@ -89,9 +90,9 @@ stages:
     outs:
     - path: metrics/evaluation.json
       hash: md5
-      md5: 24c00282e4956c7429e4d3692aafb807
-      size: 1941
+      md5: 4b5eff267c9e5e34aa13daee0107a129
+      size: 1970
     - path: plots/confusion_matrix.png
       hash: md5
-      md5: 22314c94a36e991894e80ba64ea54277
-      size: 171187
+      md5: 255ff9dd73709d49c0d449edea54ae6c
+      size: 171519

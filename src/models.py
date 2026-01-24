@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 from torchvision import models
 import timm
+from transformers import AutoModelForImageClassification, AutoImageProcessor
 
 class SwanClassifier(nn.Module):
     def __init__(self, num_classes=6, model_name='efficientnet_b0', dropout_rate=0.5, freeze_backbone=True):

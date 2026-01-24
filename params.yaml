@@ -1,19 +1,18 @@
 augmentation:
   magnitude: 9
   num_ops: 2
-  use_randaugment: true
+  use_randaugment: false
 data:
-  batch_size: 16
+  batch_size: 8
   img_size: 224
   num_classes: 6
 loss:
   label_smoothing: 0.1
 model:
-  dropout_rate: 0.3
-  freeze_backbone: true
-  name: "google/vit-base-patch16-224-in21k"
-  from_huggingface: true
-  pretrained: true
+  name: efficientnet_b0
+  from_huggingface: false
+  freeze_backbone: True
+  dropout_rate: 0.4
 optimizer:
   name: AdamW
   weight_decay: 0.01
@@ -23,7 +22,8 @@ scheduler:
 training:
   epochs: 50
   gradient_clip: 1.0
-  lr: 0.00005
-  min_epochs: 20
-  patience: 15
-  unfreeze_epoch: 10
+  lr: 0.0003
+  unfreeze_epoch: 5
+  patience: 10
+  min_epochs: 15
+
