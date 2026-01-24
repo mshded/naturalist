@@ -1,5 +1,5 @@
 augmentation:
-  magnitude: 9
+  magnitude: 5
   num_ops: 2
   use_randaugment: false
 data:
@@ -12,7 +12,7 @@ model:
   name: efficientnet_b0
   from_huggingface: false
   freeze_backbone: True
-  dropout_rate: 0.4
+  dropout_rate: 0.2
 optimizer:
   name: AdamW
   weight_decay: 0.01
@@ -22,8 +22,8 @@ scheduler:
 training:
   epochs: 50
   gradient_clip: 1.0
-  lr: 0.0003
-  unfreeze_epoch: 5
+  lr: 0.001
+  unfreeze_epoch: 2
   patience: 10
   min_epochs: 15
 

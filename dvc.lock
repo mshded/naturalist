@@ -18,16 +18,16 @@ stages:
       size: 6411
     - path: src/train.py
       hash: md5
-      md5: 045c843c78e85dd8795bd1156f3ecb8e
-      size: 5995
+      md5: 8109e1fe79e25662b9f5642780af0cfd
+      size: 5998
     - path: src/utils.py
       hash: md5
-      md5: 429c611b25e9620f20d35e1ba3a2be53
-      size: 4382
+      md5: 0fe211744d1d076279ec1d2e3687ef82
+      size: 4922
     params:
       params.yaml:
         augmentation:
-          magnitude: 9
+          magnitude: 5
           num_ops: 2
           use_randaugment: false
         data:
@@ -40,7 +40,7 @@ stages:
           name: efficientnet_b0
           from_huggingface: false
           freeze_backbone: true
-          dropout_rate: 0.4
+          dropout_rate: 0.2
         optimizer:
           name: AdamW
           weight_decay: 0.01
@@ -50,27 +50,27 @@ stages:
         training:
           epochs: 50
           gradient_clip: 1.0
-          lr: 0.0003
-          unfreeze_epoch: 5
+          lr: 0.001
+          unfreeze_epoch: 2
           patience: 10
           min_epochs: 15
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: 1d8987b3c06ba914d765a6069907ab79
-      size: 229
+      md5: c520605fcd09bf7472a86e74c55513f5
+      size: 217
     - path: models/best_model.pth
       hash: md5
-      md5: 1d33a6681519c740683157b04963f761
+      md5: c18cbd817aec3d548a7d566984bc197b
       size: 56495965
     - path: models/training_history.pth
       hash: md5
-      md5: e0cf65dd303ab2834632721263fc7745
-      size: 2339
+      md5: 30bf746c0cb15ebc7f23a4c01b456875
+      size: 2531
     - path: plots/training_history.png
       hash: md5
-      md5: 509d52887b34c663d7cd6fd1580c44c7
-      size: 236370
+      md5: b2dd115afd601e1db0b65d0c24386acc
+      size: 260650
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:
