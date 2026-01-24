@@ -1,0 +1,29 @@
+augmentation:
+  magnitude: 7
+  num_ops: 2
+  use_randaugment: false
+data:
+  batch_size: 16
+  img_size: 224
+  num_classes: 6
+loss:
+  label_smoothing: 0.1
+model:
+  name: efficientnet_b0
+  from_huggingface: false
+  freeze_backbone: True
+  dropout_rate: 0.3
+optimizer:
+  name: AdamW
+  weight_decay: 0.05
+scheduler:
+  T_max: 80
+  name: CosineAnnealingLR
+training:
+  epochs: 50
+  gradient_clip: 1.0
+  lr: 0.0005
+  unfreeze_epoch: 5
+  patience: 10
+  min_epochs: 15
+

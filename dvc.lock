@@ -27,11 +27,11 @@ stages:
     params:
       params.yaml:
         augmentation:
-          magnitude: 5
+          magnitude: 7
           num_ops: 2
           use_randaugment: false
         data:
-          batch_size: 8
+          batch_size: 16
           img_size: 224
           num_classes: 6
         loss:
@@ -40,37 +40,37 @@ stages:
           name: efficientnet_b0
           from_huggingface: false
           freeze_backbone: true
-          dropout_rate: 0.2
+          dropout_rate: 0.3
         optimizer:
           name: AdamW
-          weight_decay: 0.01
+          weight_decay: 0.05
         scheduler:
           T_max: 80
           name: CosineAnnealingLR
         training:
           epochs: 50
           gradient_clip: 1.0
-          lr: 0.001
-          unfreeze_epoch: 2
+          lr: 0.0005
+          unfreeze_epoch: 5
           patience: 10
           min_epochs: 15
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: c520605fcd09bf7472a86e74c55513f5
-      size: 217
+      md5: 230ca75c232b28ae40d5ef1c5df101e2
+      size: 230
     - path: models/best_model.pth
       hash: md5
-      md5: c18cbd817aec3d548a7d566984bc197b
-      size: 56495965
+      md5: ce818c5b0dd3e8d52faf263c8cb06f3b
+      size: 24263890
     - path: models/training_history.pth
       hash: md5
-      md5: 30bf746c0cb15ebc7f23a4c01b456875
-      size: 2531
+      md5: 1f3031f096ded930aaf3f4a7a894e6d3
+      size: 2019
     - path: plots/training_history.png
       hash: md5
-      md5: b2dd115afd601e1db0b65d0c24386acc
-      size: 260650
+      md5: ee7f4722fafef592958a8a588d6c9655
+      size: 219514
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:
