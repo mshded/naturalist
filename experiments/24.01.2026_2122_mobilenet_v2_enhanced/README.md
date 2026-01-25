@@ -1,0 +1,56 @@
+# Experiment: 24.01.2026_2122_mobilenet_v2_enhanced
+
+## Date and time: 24.01.2026 2122
+
+## Configuration:
+
+data:
+  batch_size: 16
+  img_size: 224
+  num_classes: 6
+
+model:
+  name: "mobilenet_v2"
+  dropout_rate: 0.5
+  freeze_backbone: true
+
+augmentation:
+  use_targeted_aug: false
+  
+loss:
+  label_smoothing: 0.2
+  use_focal_loss: true
+  focal_gamma: 2.0
+  focal_alpha: [0.8, 1.0, 0.6, 0.8, 0.6, 0.8]
+
+optimizer:
+  name: "AdamW"
+  weight_decay: 0.05
+
+training:
+  epochs: 100
+  lr: 0.0005          
+  gradient_clip: 1.0
+  unfreeze_epoch: 5
+  patience: 15
+  min_epochs: 25
+
+scheduler:
+  name: "CosineAnnealingLR"
+  T_max: 100
+## Metrics:
+
+{
+    "test_accuracy": 48.888888888888886,
+    "test_top2_accuracy": 75.55555595291986,
+    "test_loss": 1.4452915986378987,
+    "model_name": "mobilenet_v2",
+    "species_names": [
+        "american_swan",
+        "black_necked_swan",
+        "black_swan",
+        "mute_swan",
+        "trumpeter_swan",
+        "whooper_swan"
+    ]
+}

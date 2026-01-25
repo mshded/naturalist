@@ -1,0 +1,14 @@
+{
+    "test_accuracy": 48.888888888888886,
+    "test_top2_accuracy": 75.55555595291986,
+    "test_loss": 1.4452915986378987,
+    "model_name": "mobilenet_v2",
+    "species_names": [
+        "american_swan",
+        "black_necked_swan",
+        "black_swan",
+        "mute_swan",
+        "trumpeter_swan",
+        "whooper_swan"
+    ]
+}
