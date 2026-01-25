@@ -10,16 +10,16 @@ stages:
       nfiles: 306
     - path: src/data.py
       hash: md5
-      md5: 39013d3baaf198d302ff3b19d19b56a6
-      size: 3705
+      md5: f4417e1b83db6056c815b74d9ed73acc
+      size: 5057
     - path: src/models.py
       hash: md5
-      md5: 3b953a8466c7d8aeec72b13ba29bcea0
-      size: 6411
+      md5: b02e0bb5268bd8775a2aedd56ae84e05
+      size: 6766
     - path: src/train.py
       hash: md5
-      md5: 8109e1fe79e25662b9f5642780af0cfd
-      size: 5998
+      md5: 365e121782c9ba8ab6fc800fdb39f8ca
+      size: 7296
     - path: src/utils.py
       hash: md5
       md5: 0fe211744d1d076279ec1d2e3687ef82
@@ -27,50 +27,79 @@ stages:
     params:
       params.yaml:
         augmentation:
+          use_strong_aug: true
           magnitude: 7
-          num_ops: 2
-          use_randaugment: false
+          special_classes:
+            black_necked_swan:
+              saturation_range:
+              - 0.5
+              - 1.5
+              brightness_range:
+              - 0.7
+              - 1.3
+            american_swan:
+              random_perspective: true
+              distortion_scale: 0.2
+          brightness_range:
+          - 0.7
+          - 1.3
+          saturation_range:
+          - 0.8
+          - 1.2
+          hue_range:
+          - -0.1
+          - 0.1
+          rotation_degrees: 20
         data:
-          batch_size: 16
-          img_size: 224
+          batch_size: 32
+          img_size: 256
           num_classes: 6
         loss:
           label_smoothing: 0.1
+          use_focal_loss: true
+          focal_gamma: 1.5
+          focal_alpha:
+          - 1.2
+          - 1.8
+          - 1.0
+          - 1.3
+          - 0.8
+          - 1.2
         model:
-          name: efficientnet_b0
+          name: mobilenet_v2
           from_huggingface: false
           freeze_backbone: true
-          dropout_rate: 0.3
+          dropout_rate: 0.4
         optimizer:
           name: AdamW
-          weight_decay: 0.05
+          weight_decay: 0.01
         scheduler:
           T_max: 80
           name: CosineAnnealingLR
         training:
-          epochs: 50
+          epochs: 120
           gradient_clip: 1.0
-          lr: 0.0005
-          unfreeze_epoch: 5
-          patience: 10
+          lr: 0.0006
+          unfreeze_epoch: 8
+          patience: 25
           min_epochs: 15
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: 230ca75c232b28ae40d5ef1c5df101e2
-      size: 230
+      md5: 68f85a083ce6c235bf24e20e131dea63
+      size: 219
     - path: models/best_model.pth
       hash: md5
-      md5: ce818c5b0dd3e8d52faf263c8cb06f3b
-      size: 24263890
+      md5: c5a04c931be9d46a822fc76e878419dd
+      size: 34993208
     - path: models/training_history.pth
       hash: md5
-      md5: 1f3031f096ded930aaf3f4a7a894e6d3
-      size: 2019
+      md5: bf3ecc1d810b209fc969df066c9a5e89
+      size: 3427
     - path: plots/training_history.png
       hash: md5
-      md5: ee7f4722fafef592958a8a588d6c9655
-      size: 219514
+      md5: e4c435a9650ddfb2c27318a56365f955
+      size: 249427
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:
