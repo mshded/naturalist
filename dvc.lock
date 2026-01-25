@@ -10,16 +10,16 @@ stages:
       nfiles: 306
     - path: src/data.py
       hash: md5
-      md5: f4417e1b83db6056c815b74d9ed73acc
-      size: 5057
+      md5: f8f2ac049b72a2245571f6461d26b6aa
+      size: 4661
     - path: src/models.py
       hash: md5
-      md5: b02e0bb5268bd8775a2aedd56ae84e05
-      size: 6766
+      md5: 3e7a8c56274dcb430232ffb905c467c9
+      size: 6391
     - path: src/train.py
       hash: md5
-      md5: 365e121782c9ba8ab6fc800fdb39f8ca
-      size: 7296
+      md5: 715d7fb541bf4915227f0e658b2284f6
+      size: 7689
     - path: src/utils.py
       hash: md5
       md5: 0fe211744d1d076279ec1d2e3687ef82
@@ -28,67 +28,71 @@ stages:
       params.yaml:
         augmentation:
           brightness_range:
-          - 0.7
-          - 1.3
+          - 0.85
+          - 1.15
           contrast_range:
-          - 0.8
-          - 1.2
+          - 0.9
+          - 1.1
           saturation_range:
-          - 0.8
-          - 1.2
+          - 0.9
+          - 1.1
           hue_range:
-          - -0.1
-          - 0.1
-          rotation_degrees: 20
+          - -0.05
+          - 0.05
+          rotation_degrees: 10
+          focus_saturation: false
+          focus_contrast: false
         data:
-          batch_size: 16
+          batch_size: 8
           img_size: 224
           num_classes: 6
         loss:
-          label_smoothing: 0.1
           use_focal_loss: true
-          focal_gamma: 1.5
+          focal_gamma: 2.0
           focal_alpha:
-          - 1.2
-          - 1.8
           - 1.0
-          - 1.3
-          - 0.8
-          - 1.2
+          - 2.5
+          - 1.0
+          - 1.0
+          - 1.0
+          - 1.0
         model:
-          name: mobilenet_v2
+          name: efficientnet_b0
           dropout_rate: 0.4
           freeze_backbone: true
         optimizer:
           name: AdamW
-          weight_decay: 0.01
+          weight_decay: 0.005
         scheduler:
-          name: CosineAnnealingLR
-          T_max: 100
+          name: ReduceLROnPlateau
+          mode: max
+          factor: 0.5
+          patience: 10
+          min_lr: 1e-06
         training:
-          epochs: 100
-          lr: 0.001
+          lr: 0.0005
+          epochs: 160
           gradient_clip: 1.0
-          unfreeze_epoch: 8
-          patience: 25
-          min_epochs: 15
+          unfreeze_epoch: 30
+          patience: 35
+          min_epochs: 50
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: 4415ff5dddd5ba7a28c8bc9b047116a9
-      size: 231
+      md5: 761c202cc3e53f16308db070e0b78083
+      size: 230
     - path: models/best_model.pth
       hash: md5
-      md5: 542a88f7ffcbd04f0fae023691b8304d
-      size: 34992888
+      md5: ef53c968f12357c763c48159a2ae45ed
+      size: 56496285
     - path: models/training_history.pth
       hash: md5
-      md5: c70c8d8e337fd00401d4ef7c7f644e1e
-      size: 2659
+      md5: 5fd2e4ccb253c2b28bb85554038e5bf5
+      size: 5475
     - path: plots/training_history.png
       hash: md5
-      md5: eb0929440043542981e84ee7b7bd2a45
-      size: 285002
+      md5: 331ecd5aa9274b751419ae5808eabb48
+      size: 332978
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:
