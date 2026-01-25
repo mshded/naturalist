@@ -27,22 +27,12 @@ stages:
     params:
       params.yaml:
         augmentation:
-          use_strong_aug: true
-          magnitude: 7
-          special_classes:
-            black_necked_swan:
-              saturation_range:
-              - 0.5
-              - 1.5
-              brightness_range:
-              - 0.7
-              - 1.3
-            american_swan:
-              random_perspective: true
-              distortion_scale: 0.2
           brightness_range:
           - 0.7
           - 1.3
+          contrast_range:
+          - 0.8
+          - 1.2
           saturation_range:
           - 0.8
           - 1.2
@@ -51,8 +41,8 @@ stages:
           - 0.1
           rotation_degrees: 20
         data:
-          batch_size: 32
-          img_size: 256
+          batch_size: 16
+          img_size: 224
           num_classes: 6
         loss:
           label_smoothing: 0.1
@@ -67,45 +57,44 @@ stages:
           - 1.2
         model:
           name: mobilenet_v2
-          from_huggingface: false
-          freeze_backbone: true
           dropout_rate: 0.4
+          freeze_backbone: true
         optimizer:
           name: AdamW
           weight_decay: 0.01
         scheduler:
-          T_max: 80
           name: CosineAnnealingLR
+          T_max: 100
         training:
-          epochs: 120
+          epochs: 100
+          lr: 0.001
           gradient_clip: 1.0
-          lr: 0.0006
           unfreeze_epoch: 8
           patience: 25
           min_epochs: 15
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: 68f85a083ce6c235bf24e20e131dea63
-      size: 219
+      md5: 4415ff5dddd5ba7a28c8bc9b047116a9
+      size: 231
     - path: models/best_model.pth
       hash: md5
-      md5: c5a04c931be9d46a822fc76e878419dd
-      size: 34993208
+      md5: 542a88f7ffcbd04f0fae023691b8304d
+      size: 34992888
     - path: models/training_history.pth
       hash: md5
-      md5: bf3ecc1d810b209fc969df066c9a5e89
-      size: 3427
+      md5: c70c8d8e337fd00401d4ef7c7f644e1e
+      size: 2659
     - path: plots/training_history.png
       hash: md5
-      md5: e4c435a9650ddfb2c27318a56365f955
-      size: 249427
+      md5: eb0929440043542981e84ee7b7bd2a45
+      size: 285002
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:
     - path: models/best_model.pth
       hash: md5
-      md5: 1d33a6681519c740683157b04963f761
+      md5: 2b9e630e3ed9d9c4c911b488353b1467
       size: 56495965
     - path: notebooks/data/processed/swans_dataset
       hash: md5
@@ -114,14 +103,14 @@ stages:
       nfiles: 304
     - path: src/evaluate.py
       hash: md5
-      md5: 959a58e4a9a248925aca999544e6debf
-      size: 3150
+      md5: e99470b1890fa807dbad887b68368710
+      size: 3368
     outs:
     - path: metrics/evaluation.json
       hash: md5
-      md5: 4b5eff267c9e5e34aa13daee0107a129
-      size: 1970
+      md5: d22df859bfe9621d2813bb62b2aba3ea
+      size: 2002
     - path: plots/confusion_matrix.png
       hash: md5
-      md5: 255ff9dd73709d49c0d449edea54ae6c
-      size: 171519
+      md5: 6e9231fdfcb92e1afb40168d490babfe
+      size: 173189
