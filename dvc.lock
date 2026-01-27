@@ -31,31 +31,39 @@ stages:
           - 0.85
           - 1.15
           contrast_range:
-          - 0.9
-          - 1.1
+          - 0.85
+          - 1.15
           saturation_range:
-          - 0.9
-          - 1.1
+          - 0.85
+          - 1.15
           hue_range:
           - -0.05
           - 0.05
-          rotation_degrees: 10
+          rotation_degrees: 20
           horizontal_flip: true
-          vertical_flip: false
+          vertical_flip: true
           mixup_alpha: 0.2
-          cutmix_alpha: 0.0
-          apply_mixup_cutmix_prob: 0.35
+          cutmix_alpha: 0.5
+          apply_mixup_cutmix_prob: 0.3
         data:
           batch_size: 8
-          img_size: 224
+          img_size: 240
           num_classes: 6
         loss:
-          use_focal_loss: false
-          label_smoothing: 0.05
+          use_focal_loss: true
+          focal_gamma: 1.5
+          focal_alpha:
+          - 1.0
+          - 2.0
+          - 1.0
+          - 3.0
+          - 1.0
+          - 1.0
+          label_smoothing: 0.0
         model:
-          name: efficientnet_b0
-          dropout_rate: 0.3
-          freeze_backbone: false
+          name: efficientnet_b1
+          dropout_rate: 0.45
+          freeze_backbone: true
         optimizer:
           name: AdamW
           weight_decay: 0.01
@@ -63,32 +71,32 @@ stages:
           name: ReduceLROnPlateau
           mode: max
           factor: 0.5
-          patience: 12
+          patience: 10
           min_lr: 1e-06
         training:
-          lr: 0.0003
-          epochs: 120
+          lr: 0.0002
+          epochs: 90
           gradient_clip: 1.0
-          unfreeze_epoch: 10
-          patience: 25
-          min_epochs: 60
+          unfreeze_epoch: 15
+          patience: 20
+          min_epochs: 50
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: 6f1477e78c1548fc96283edded1612cd
-      size: 231
+      md5: 43d377e1240b4ab0abd7d28efc96a134
+      size: 218
     - path: models/best_model.pth
       hash: md5
-      md5: 0fa18aa0560b18fc15c5ca952b67441a
-      size: 56496349
+      md5: e0c8efa1f17472d9e51a3b7a9ac262df
+      size: 76957056
     - path: models/training_history.pth
       hash: md5
-      md5: d4bb130284bf9322246c02736a6f47c8
-      size: 3619
+      md5: f06b8d609eb0d37e00093ed03d4fc891
+      size: 3235
     - path: plots/training_history.png
       hash: md5
-      md5: 65e132ae34a530820eab37496b81d3d0
-      size: 282463
+      md5: 9e72a3ee31fb316920ed8e06ef794ce0
+      size: 295503
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:
