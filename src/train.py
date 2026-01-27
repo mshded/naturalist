@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 from collections import Counter
 import warnings
+import torch.nn.functional as F  
 
 warnings.filterwarnings("ignore")
 
@@ -38,25 +39,28 @@ def main(config_path="params.yaml"):
 
     model = SwanClassifier(
         num_classes=params["data"]["num_classes"],
-        model_name=params["model"]["name"],
         dropout_rate=params["model"]["dropout_rate"],
         freeze_backbone=params["model"]["freeze_backbone"],
+        model_name='efficientnet_b0'
     ).to(device)
 
-    #class weights
+    # class weights
     labels = train_loader.dataset.metadata["species_key"]
     class_counts = Counter(labels)
 
-    weights = [1.0 / class_counts[cls] for cls in species_names]
+    total = sum(class_counts.values())
+    weights = [total / class_counts[cls] for cls in species_names]
     class_weights = torch.tensor(weights, dtype=torch.float).to(device)
 
+    # loss
     criterion = nn.CrossEntropyLoss(
         weight=class_weights,
-        label_smoothing=params["loss"]["label_smoothing"],
+        label_smoothing=params["loss"].get("label_smoothing", 0.0)
     )
 
     # optimizer
     lr = params["training"]["lr"]
+    weight_decay = params["optimizer"]["weight_decay"]
 
     backbone_params = []
     classifier_params = []
@@ -72,11 +76,16 @@ def main(config_path="params.yaml"):
             {"params": backbone_params, "lr": lr * 0.1},
             {"params": classifier_params, "lr": lr},
         ],
-        weight_decay=params["optimizer"]["weight_decay"],
+        weight_decay=weight_decay,
     )
-    #scheduler
-    scheduler = optim.lr_scheduler.CosineAnnealingLR(
-        optimizer, T_max=params["training"]["epochs"]
+
+    # scheduler
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(
+        optimizer,
+        mode=params["scheduler"].get("mode", "max"),
+        factor=params["scheduler"].get("factor", 0.5),
+        patience=params["scheduler"].get("patience", 10),
+        min_lr=params["scheduler"].get("min_lr", 1e-6),
     )
 
     train_losses, val_losses = [], []
@@ -88,12 +97,13 @@ def main(config_path="params.yaml"):
     for epoch in range(params["training"]["epochs"]):
         print(f"\nEpoch {epoch + 1}/{params['training']['epochs']}")
 
-        # unfreeze backbone
-        if epoch == params["training"]["unfreeze_epoch"]:
+        # unfreeze
+        if (
+            params["training"]["unfreeze_epoch"] is not None
+            and epoch == params["training"]["unfreeze_epoch"]
+        ):
             print("Unfreezing backbone")
             model.unfreeze_backbone()
-            optimizer.param_groups[0]["lr"] = lr * 0.1
-            optimizer.param_groups[1]["lr"] = lr
 
         # train
         train_loss, train_acc = train_epoch(
@@ -106,7 +116,7 @@ def main(config_path="params.yaml"):
         )
 
         # validate
-        val_loss, val_acc, _, _ = validate(
+        val_loss, val_acc, _, _, _ = validate(
             model=model,
             loader=val_loader,
             criterion=criterion,
@@ -121,10 +131,11 @@ def main(config_path="params.yaml"):
         print(
             f"Train Acc: {train_acc:.2f}% | "
             f"Val Acc: {val_acc:.2f}% | "
-            f"LR backbone: {optimizer.param_groups[0]['lr']:.2e}"
+            f"LR backbone: {optimizer.param_groups[0]['lr']:.2e} | "
+            f"LR head: {optimizer.param_groups[1]['lr']:.2e}"
         )
 
-        # сохраняем лучшую модель
+        # save best model
         if val_acc > best_val_acc:
             best_val_acc = val_acc
             epochs_no_improve = 0
@@ -140,12 +151,12 @@ def main(config_path="params.yaml"):
                 },
                 "models/best_model.pth",
             )
-            print(f"Сохранена лучшая модель с точностью: {val_acc:.2f}%")
+            print(f"Сохранена лучшая модель: {val_acc:.2f}%")
 
         else:
             epochs_no_improve += 1
 
-        scheduler.step()
+        scheduler.step(float(val_acc))
 
         # early stopping
         if epoch >= params["training"]["min_epochs"]:

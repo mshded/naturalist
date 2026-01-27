@@ -1,11 +1,10 @@
 import torch
-import torch.nn as nn
-import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import confusion_matrix
 import json
 import os
+import numpy as np
 
 # обучаем модель для всех данных за одну эпоху
 def train_epoch(model, loader, criterion, optimizer, device, gradient_clip=None):
@@ -16,9 +15,9 @@ def train_epoch(model, loader, criterion, optimizer, device, gradient_clip=None)
     
     for batch_idx, (images, labels, _) in enumerate(loader):
         images, labels = images.to(device), labels.to(device)
-        
-        # Forward pass
+
         optimizer.zero_grad()
+
         outputs = model(images)
         loss = criterion(outputs, labels)
         
@@ -45,14 +44,15 @@ def train_epoch(model, loader, criterion, optimizer, device, gradient_clip=None)
     
     return epoch_loss, epoch_acc
 
-# оценка модели на val/test данных
-def validate(model, loader, criterion, device):
+# оценка модели на val/test данных + topk
+def validate(model, loader, criterion, device, top_k=2):
     model.eval()
     running_loss = 0.0
     correct = 0
     total = 0
     all_preds = []
     all_labels = []
+    topk_correct = 0
     
     with torch.no_grad():
         for images, labels, _ in loader:
@@ -61,18 +61,30 @@ def validate(model, loader, criterion, device):
             outputs = model(images)
             loss = criterion(outputs, labels)
             
-            running_loss += loss.item()
+            # обычная точность
             _, predicted = outputs.max(1)
-            total += labels.size(0)
             correct += predicted.eq(labels).sum().item()
+            
+            # top-k точность
+            topk_correct += top_k_accuracy(outputs, labels, k=top_k) * labels.size(0)
+            
+            running_loss += loss.item()
+            total += labels.size(0)
             
             all_preds.extend(predicted.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
     
     val_loss = running_loss / len(loader)
     val_acc = 100. * correct / total
+    topk_acc = 100. * topk_correct / total
     
-    return val_loss, val_acc, all_preds, all_labels
+    return val_loss, val_acc, topk_acc, all_preds, all_labels
+
+def top_k_accuracy(logits, targets, k=2):
+    _, topk_preds = torch.topk(logits, k, dim=1) # [B, k]
+    targets = targets.view(-1, 1) # [B, 1]
+    correct = (topk_preds == targets).any(dim=1) # [B]
+    return correct.float().mean().item()
 
 def plot_training_history(train_losses, val_losses, train_accs, val_accs, save_path=None):
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))

@@ -8,7 +8,7 @@ import os
 
 sys.path.append(str(Path(__file__).parent))
 
-from data import get_dataloaders, get_transforms
+from data import get_dataloaders
 from models import SwanClassifier
 from utils import validate, plot_confusion_matrix, save_metrics
 import torch.nn as nn
@@ -22,14 +22,14 @@ def evaluate_model(model_path, config_path='params.yaml'):
     os.makedirs('metrics', exist_ok=True)
     os.makedirs('plots', exist_ok=True)
     
-    # Загрузка модели
+    # loading model
     checkpoint = torch.load(model_path, map_location=device)
-    
+
     model = SwanClassifier(
         num_classes=params['data']['num_classes'],
-        model_name=params['model']['name'],
         dropout_rate=params['model']['dropout_rate'],
-        freeze_backbone=True  # размораживаем для оценки
+        freeze_backbone=True, # backbone не обучается при оценке
+        model_name='efficientnet_b0'   
     )
     model.load_state_dict(checkpoint['model_state_dict']) # загружаем сохраненные веса
     model = model.to(device)
@@ -40,18 +40,21 @@ def evaluate_model(model_path, config_path='params.yaml'):
     criterion = nn.CrossEntropyLoss()
     
     print("Оценка модели на тестовом наборе")
-    test_loss, test_acc, all_preds, all_labels = validate(model, test_loader, criterion, device)
-    
-    print(f"Точность: {test_acc:.2f}%")
+    test_loss, test_acc, test_top2_acc, all_preds, all_labels = validate(model, test_loader, criterion, device, top_k=2)
+
+    print(f"Обычная точность: {test_acc:.2f}%")
+    print(f"Top-2 точность: {test_top2_acc:.2f}%")
     print(f"Потери: {test_loss:.4f}")
     
-    # Сохранение метрик
+    # metrics
     test_metrics = {
         'test_accuracy': float(test_acc),
+        'test_top2_accuracy': float(test_top2_acc),
         'test_loss': float(test_loss),
-        'model_name': params['model']['name'],
+        'model_name': 'efficientnet_b0',
         'species_names': species_names
     }
+
     
     os.makedirs('metrics', exist_ok=True)
     save_metrics(test_metrics, 'metrics/test_metrics.json')

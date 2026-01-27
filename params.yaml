@@ -4,7 +4,6 @@ data:
   num_classes: 6
 
 model:
-  name: "efficientnet_b0"
   dropout_rate: 0.3
   freeze_backbone: false
 

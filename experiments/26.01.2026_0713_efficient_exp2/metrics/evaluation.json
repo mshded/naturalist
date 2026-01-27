@@ -1,0 +1,67 @@
+{
+    "test_metrics": {
+        "test_accuracy": 37.77777777777778,
+        "test_top2_accuracy": 62.22222222222222,
+        "test_loss": 2.0390574671328068,
+        "model_name": "efficientnet_b0",
+        "species_names": [
+            "mute_swan",
+            "black_swan",
+            "whooper_swan",
+            "black_necked_swan",
+            "trumpeter_swan",
+            "american_swan"
+        ]
+    },
+    "classification_report": {
+        "mute_swan": {
+            "precision": 0.5714285714285714,
+            "recall": 0.5,
+            "f1-score": 0.5333333333333333,
+            "support": 8.0
+        },
+        "black_swan": {
+            "precision": 0.38461538461538464,
+            "recall": 0.625,
+            "f1-score": 0.47619047619047616,
+            "support": 8.0
+        },
+        "whooper_swan": {
+            "precision": 0.3333333333333333,
+            "recall": 0.2857142857142857,
+            "f1-score": 0.3076923076923077,
+            "support": 7.0
+        },
+        "black_necked_swan": {
+            "precision": 1.0,
+            "recall": 0.14285714285714285,
+            "f1-score": 0.25,
+            "support": 7.0
+        },
+        "trumpeter_swan": {
+            "precision": 0.5714285714285714,
+            "recall": 0.5,
+            "f1-score": 0.5333333333333333,
+            "support": 8.0
+        },
+        "american_swan": {
+            "precision": 0.09090909090909091,
+            "recall": 0.14285714285714285,
+            "f1-score": 0.1111111111111111,
+            "support": 7.0
+        },
+        "accuracy": 0.37777777777777777,
+        "macro avg": {
+            "precision": 0.49195249195249185,
+            "recall": 0.36607142857142855,
+            "f1-score": 0.3686100936100936,
+            "support": 45.0
+        },
+        "weighted avg": {
+            "precision": 0.49309949309949314,
+            "recall": 0.37777777777777777,
+            "f1-score": 0.37832180165513496,
+            "support": 45.0
+        }
+    }
+}

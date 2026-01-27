@@ -1,0 +1,14 @@
+{
+    "test_accuracy": 55.55555555555556,
+    "test_top2_accuracy": 77.77777777777777,
+    "test_loss": 1.5364426374435425,
+    "model_name": "efficientnet_b0",
+    "species_names": [
+        "mute_swan",
+        "black_swan",
+        "whooper_swan",
+        "black_necked_swan",
+        "trumpeter_swan",
+        "american_swan"
+    ]
+}

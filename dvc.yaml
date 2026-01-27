@@ -2,7 +2,7 @@ stages:
   train_model:
     cmd: python src/train.py --config params.yaml
     deps:
-      - notebooks/data/processed
+      - data/processed
       - src/train.py
       - src/models.py
       - src/data.py
@@ -17,8 +17,7 @@ stages:
       - augmentation
     outs:
       - models/best_model.pth
-      - models/training_history.pth
-      - plots/training_history.png  
+      - models/training_history.pth  
       - metrics/train_metrics.json  
 
   evaluate:
@@ -26,10 +25,16 @@ stages:
     deps:
       - src/evaluate.py
       - models/best_model.pth
-      - notebooks/data/processed/swans_dataset
+      - data/processed/swans_dataset
     metrics:
       - metrics/evaluation.json:
           cache: false
     plots:
       - plots/confusion_matrix.png:
           cache: false
+  web:
+    cmd: streamlit run src/web.py
+    deps:
+      - src/web.py
+      - models/best_model.pth
+      - params.yaml

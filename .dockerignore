@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+*.pkl
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# Git
+.git/
+.gitignore
+
+# DVC
+.dvc/
+.dvcignore
+*.dvc
+
+# Experiments / outputs
+experiments/
+metrics/
+plots/
+
+# Notebooks
+notebooks/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Cache
+.cache/

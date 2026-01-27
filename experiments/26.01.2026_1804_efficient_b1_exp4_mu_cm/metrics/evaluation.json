@@ -1,0 +1,67 @@
+{
+    "test_metrics": {
+        "test_accuracy": 44.44444444444444,
+        "test_top2_accuracy": 66.66666679912143,
+        "test_loss": 1.3384595414002736,
+        "model_name": "efficientnet_b1",
+        "species_names": [
+            "mute_swan",
+            "black_swan",
+            "whooper_swan",
+            "black_necked_swan",
+            "trumpeter_swan",
+            "american_swan"
+        ]
+    },
+    "classification_report": {
+        "mute_swan": {
+            "precision": 0.5,
+            "recall": 0.5,
+            "f1-score": 0.5,
+            "support": 8.0
+        },
+        "black_swan": {
+            "precision": 0.6666666666666666,
+            "recall": 0.75,
+            "f1-score": 0.7058823529411765,
+            "support": 8.0
+        },
+        "whooper_swan": {
+            "precision": 0.2857142857142857,
+            "recall": 0.2857142857142857,
+            "f1-score": 0.2857142857142857,
+            "support": 7.0
+        },
+        "black_necked_swan": {
+            "precision": 0.3333333333333333,
+            "recall": 0.2857142857142857,
+            "f1-score": 0.3076923076923077,
+            "support": 7.0
+        },
+        "trumpeter_swan": {
+            "precision": 0.46153846153846156,
+            "recall": 0.75,
+            "f1-score": 0.5714285714285714,
+            "support": 8.0
+        },
+        "american_swan": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 7.0
+        },
+        "accuracy": 0.4444444444444444,
+        "macro avg": {
+            "precision": 0.3745421245421245,
+            "recall": 0.42857142857142855,
+            "f1-score": 0.39511958629605687,
+            "support": 45.0
+        },
+        "weighted avg": {
+            "precision": 0.38575498575498574,
+            "recall": 0.4444444444444444,
+            "f1-score": 0.40827407886231415,
+            "support": 45.0
+        }
+    }
+}
