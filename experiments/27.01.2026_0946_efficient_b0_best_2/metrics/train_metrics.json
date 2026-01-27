@@ -1,0 +1,7 @@
+{
+    "best_val_accuracy": 64.44444444444444,
+    "final_train_accuracy": 85.71428571428571,
+    "final_val_accuracy": 53.333333333333336,
+    "final_train_loss": 0.273205940913478,
+    "final_val_loss": 1.1414135595162709
+}
