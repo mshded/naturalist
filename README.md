@@ -25,12 +25,12 @@
 
 ```bash
 docker build -t naturalist .
-
+```
 2. Запустить контейнер с приложением
 
 ```bash
 docker run -p 8501:8501 naturalist
-
+```
 3. Открыть приложение в браузере
 
 http://localhost:8501
