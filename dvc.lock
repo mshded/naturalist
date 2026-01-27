@@ -40,7 +40,7 @@ stages:
           - -0.05
           - 0.05
           rotation_degrees: 10
-          horizontal_flip: true
+          horizontal_flip: false
           vertical_flip: false
           mixup_alpha: 0.0
           cutmix_alpha: 0.0
@@ -54,7 +54,7 @@ stages:
           label_smoothing: 0.05
         model:
           name: efficientnet_b0
-          dropout_rate: 0.25
+          dropout_rate: 0.3
           freeze_backbone: false
         optimizer:
           name: AdamW
@@ -69,26 +69,26 @@ stages:
           lr: 0.0003
           epochs: 90
           gradient_clip: 1.0
-          unfreeze_epoch:
+          unfreeze_epoch: 10
           patience: 20
           min_epochs: 50
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: a1916f789beac23be8eda7509ecd0a15
-      size: 229
+      md5: 7153707edadd676f489e247760b3e4eb
+      size: 230
     - path: models/best_model.pth
       hash: md5
-      md5: addb5dc853ede67edebe3115a60bfd47
+      md5: 864a967f4ca59d5ec2cfbdc16e7cdd26
       size: 56496349
     - path: models/training_history.pth
       hash: md5
-      md5: a99b45a40a8092f0476fbf11893a2c96
-      size: 3235
+      md5: 8c36e6e06bc790ce6a328e9aead88037
+      size: 3363
     - path: plots/training_history.png
       hash: md5
-      md5: 286c5258e4ea41d9f99a8143b382f8c2
-      size: 266811
+      md5: 70707b630e145759ae802ec7525adccb
+      size: 261617
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:
