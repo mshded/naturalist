@@ -17,5 +17,23 @@
   - `train.py` — обучение модели  
   - `web.py` — Streamlit-приложение  
 - **test images/** — изображения для тестирования  
-- **01_explore_inaturalist/** — парсинг данных с iNaturalist  
+- **01_explore_inaturalist/** — парсинг данных с iNaturalist
+
+- ## Быстрый старт через Docker
+
+1. Построить Docker-образ проекта:
+
+```bash
+docker build -t naturalist .
+
+2. Запустить контейнер с приложением
+
+```bash
+docker run -p 8501:8501 naturalist
+
+3. Открыть приложение в браузере
+
+http://localhost:8501
+
+
 
