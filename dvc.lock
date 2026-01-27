@@ -40,7 +40,7 @@ stages:
           - -0.05
           - 0.05
           rotation_degrees: 10
-          horizontal_flip: false
+          horizontal_flip: true
           vertical_flip: false
           mixup_alpha: 0.0
           cutmix_alpha: 0.0
@@ -50,23 +50,15 @@ stages:
           img_size: 224
           num_classes: 6
         loss:
-          use_focal_loss: true
-          focal_gamma: 2.0
-          focal_alpha:
-          - 1.0
-          - 2.5
-          - 1.0
-          - 1.0
-          - 1.0
-          - 1.0
-          label_smoothing: 0.0
+          use_focal_loss: false
+          label_smoothing: 0.05
         model:
           name: efficientnet_b0
-          dropout_rate: 0.4
-          freeze_backbone: true
+          dropout_rate: 0.3
+          freeze_backbone: false
         optimizer:
           name: AdamW
-          weight_decay: 0.005
+          weight_decay: 0.01
         scheduler:
           name: ReduceLROnPlateau
           mode: max
@@ -74,29 +66,29 @@ stages:
           patience: 10
           min_lr: 1e-06
         training:
-          lr: 0.0005
-          epochs: 160
+          lr: 0.0003
+          epochs: 90
           gradient_clip: 1.0
-          unfreeze_epoch: 30
-          patience: 35
+          unfreeze_epoch: 10
+          patience: 20
           min_epochs: 50
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: c1804fd362ae1921c59b8bdaa3ebfc45
+      md5: ce9e1e709b954e5b762756ff66bf945a
       size: 230
     - path: models/best_model.pth
       hash: md5
-      md5: 10b265b2a22bfbddc72487baaa5341c9
-      size: 49565982
+      md5: ebb075ffe9851ac2fb3d29a692f7e9fc
+      size: 56496349
     - path: models/training_history.pth
       hash: md5
-      md5: f0c11dc339fbd8df0a7159be96fd8831
-      size: 6051
+      md5: 0a9e0287b21d7a9c76bc1add4d2ba4e2
+      size: 3235
     - path: plots/training_history.png
       hash: md5
-      md5: 5e22bdb8d98ebb5726dd714a644e9fde
-      size: 346682
+      md5: 8b668687f9cf44159be2791f4320330b
+      size: 268767
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:
