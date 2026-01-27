@@ -16,22 +16,21 @@ augmentation:
   rotation_degrees: 10
   horizontal_flip: true
   vertical_flip: false
-
-  mixup_alpha: 0.0
+  mixup_alpha: 0.2
   cutmix_alpha: 0.0
-  apply_mixup_cutmix_prob: 0.0
+  apply_mixup_cutmix_prob: 0.35  
 
 loss:
   use_focal_loss: false
   label_smoothing: 0.05
 
 training:
-  lr: 0.0003
-  epochs: 90
+  lr: 0.0003               
+  epochs: 120              
   gradient_clip: 1.0
   unfreeze_epoch: 10
-  patience: 20
-  min_epochs: 50
+  patience: 25             
+  min_epochs: 60          
 
 optimizer:
   name: "AdamW"
@@ -41,5 +40,5 @@ scheduler:
   name: "ReduceLROnPlateau"
   mode: "max"
   factor: 0.5
-  patience: 10
+  patience: 12
   min_lr: 0.000001
