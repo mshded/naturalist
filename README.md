@@ -1,9 +1,21 @@
-# Naturalist Project 
- 
-## Swan species-classifier  
- 
-## Compose  
-- `data/` -  
-- `src/` -  
-- `notebooks/` -  
-- `models/` - 
+# Swan Species Classifier
+
+Классификатор видов лебедей на изображениях с использованием нейросетей EfficientNet B0.
+
+## Структура проекта
+
+- **data/** — исходные данные и json с видами лебедей  
+- **experiments/** — эксперименты и их результаты  
+- **metrics/** — метрики обучения  
+- **models/** — сохранённые модели  
+- **plots/** — графики обучения и визуализации  
+- **src/** — исходный код:
+  - `data.py` — загрузка и обработка данных  
+  - `evaluate.py` — оценка модели  
+  - `models.py` — определение модели  
+  - `utils.py` — вспомогательные функции  
+  - `train.py` — обучение модели  
+  - `web.py` — Streamlit-приложение  
+- **test images/** — изображения для тестирования  
+- **01_explore_inaturalist/** — парсинг данных с iNaturalist  
+
