@@ -31,39 +31,31 @@ stages:
           - 0.85
           - 1.15
           contrast_range:
-          - 0.85
-          - 1.15
+          - 0.9
+          - 1.1
           saturation_range:
-          - 0.85
-          - 1.15
+          - 0.9
+          - 1.1
           hue_range:
           - -0.05
           - 0.05
-          rotation_degrees: 20
-          horizontal_flip: true
-          vertical_flip: true
-          mixup_alpha: 0.2
-          cutmix_alpha: 0.5
-          apply_mixup_cutmix_prob: 0.3
+          rotation_degrees: 10
+          horizontal_flip: false
+          vertical_flip: false
+          mixup_alpha: 0.0
+          cutmix_alpha: 0.0
+          apply_mixup_cutmix_prob: 0.0
         data:
           batch_size: 8
-          img_size: 240
+          img_size: 224
           num_classes: 6
         loss:
-          use_focal_loss: true
-          focal_gamma: 1.5
-          focal_alpha:
-          - 1.0
-          - 2.0
-          - 1.0
-          - 3.0
-          - 1.0
-          - 1.0
-          label_smoothing: 0.0
+          use_focal_loss: false
+          label_smoothing: 0.05
         model:
-          name: efficientnet_b1
-          dropout_rate: 0.45
-          freeze_backbone: true
+          name: efficientnet_b0
+          dropout_rate: 0.3
+          freeze_backbone: false
         optimizer:
           name: AdamW
           weight_decay: 0.01
@@ -74,29 +66,29 @@ stages:
           patience: 10
           min_lr: 1e-06
         training:
-          lr: 0.0002
+          lr: 0.0003
           epochs: 90
           gradient_clip: 1.0
-          unfreeze_epoch: 15
+          unfreeze_epoch: 10
           patience: 20
           min_epochs: 50
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: 43d377e1240b4ab0abd7d28efc96a134
-      size: 218
+      md5: 7153707edadd676f489e247760b3e4eb
+      size: 230
     - path: models/best_model.pth
       hash: md5
-      md5: e0c8efa1f17472d9e51a3b7a9ac262df
-      size: 76957056
+      md5: 864a967f4ca59d5ec2cfbdc16e7cdd26
+      size: 56496349
     - path: models/training_history.pth
       hash: md5
-      md5: f06b8d609eb0d37e00093ed03d4fc891
-      size: 3235
+      md5: 8c36e6e06bc790ce6a328e9aead88037
+      size: 3363
     - path: plots/training_history.png
       hash: md5
-      md5: 9e72a3ee31fb316920ed8e06ef794ce0
-      size: 295503
+      md5: 70707b630e145759ae802ec7525adccb
+      size: 261617
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:
