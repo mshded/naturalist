@@ -10,20 +10,20 @@ stages:
       nfiles: 306
     - path: src/data.py
       hash: md5
-      md5: 437f3ac31bda98daa8f72b3c151bfa31
-      size: 5391
+      md5: 932e504ee880f6b27764da143551374f
+      size: 5387
     - path: src/models.py
       hash: md5
       md5: b1d082ddea04efc5230e7b2547f8419e
       size: 7114
     - path: src/train.py
       hash: md5
-      md5: 46dc12a73816d279bef9cf3e21c7cc67
-      size: 7584
+      md5: b3a6dc65710f87c6ad4403ce8f6b7e46
+      size: 8179
     - path: src/utils.py
       hash: md5
-      md5: 0fe211744d1d076279ec1d2e3687ef82
-      size: 4922
+      md5: 16e540cfc68a4a5c88f582f7c7b36756
+      size: 6612
     params:
       params.yaml:
         augmentation:
@@ -40,20 +40,21 @@ stages:
           - -0.05
           - 0.05
           rotation_degrees: 10
-          focus_saturation: false
-          focus_contrast: false
+          horizontal_flip: true
+          vertical_flip: false
+          mixup_alpha: 0.0
+          cutmix_alpha: 0.0
+          apply_mixup_cutmix_prob: 0.0
         data:
           batch_size: 8
           img_size: 224
           num_classes: 6
         loss:
           use_focal_loss: false
-          focal_gamma: 1.0
-          focal_alpha:
           label_smoothing: 0.05
         model:
           name: efficientnet_b0
-          dropout_rate: 0.3
+          dropout_rate: 0.25
           freeze_backbone: false
         optimizer:
           name: AdamW
@@ -68,26 +69,26 @@ stages:
           lr: 0.0003
           epochs: 90
           gradient_clip: 1.0
-          unfreeze_epoch: 10
+          unfreeze_epoch:
           patience: 20
           min_epochs: 50
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: 7b0e30a2d63a24af16aee08d7b76f661
-      size: 230
+      md5: a1916f789beac23be8eda7509ecd0a15
+      size: 229
     - path: models/best_model.pth
       hash: md5
-      md5: b5d3eec1c0d460f90d9b261d367ddc8a
-      size: 56496285
+      md5: addb5dc853ede67edebe3115a60bfd47
+      size: 56496349
     - path: models/training_history.pth
       hash: md5
-      md5: 5adba16e2c98cf4bbb2ba2f76a75a892
+      md5: a99b45a40a8092f0476fbf11893a2c96
       size: 3235
     - path: plots/training_history.png
       hash: md5
-      md5: b84979d1e50d274b2a04c960cb651ee2
-      size: 256085
+      md5: 286c5258e4ea41d9f99a8143b382f8c2
+      size: 266811
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:

@@ -5,7 +5,7 @@ data:
 
 model:
   name: "efficientnet_b0"
-  dropout_rate: 0.3
+  dropout_rate: 0.25
   freeze_backbone: false
 
 augmentation:
@@ -14,20 +14,22 @@ augmentation:
   saturation_range: [0.9, 1.1]
   hue_range: [-0.05, 0.05]
   rotation_degrees: 10
-  focus_saturation: false
-  focus_contrast: false
+  horizontal_flip: true
+  vertical_flip: false
+
+  mixup_alpha: 0.0
+  cutmix_alpha: 0.0
+  apply_mixup_cutmix_prob: 0.0
 
 loss:
   use_focal_loss: false
-  focal_gamma: 1.0
-  focal_alpha: null
   label_smoothing: 0.05
 
 training:
   lr: 0.0003
   epochs: 90
   gradient_clip: 1.0
-  unfreeze_epoch: 10
+  unfreeze_epoch: null   
   patience: 20
   min_epochs: 50
 
@@ -41,4 +43,3 @@ scheduler:
   factor: 0.5
   patience: 10
   min_lr: 0.000001
-
