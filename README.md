@@ -1,6 +1,6 @@
 # Naturalist Project 
  
-## Swan-classifier  
+## Swan species-classifier  
  
 ## Compose  
 - `data/` -  
