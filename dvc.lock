@@ -10,20 +10,20 @@ stages:
       nfiles: 306
     - path: src/data.py
       hash: md5
-      md5: 932e504ee880f6b27764da143551374f
-      size: 5387
+      md5: 13b58ebee815ca3b342a1dbe5cbae7f9
+      size: 5204
     - path: src/models.py
       hash: md5
-      md5: b1d082ddea04efc5230e7b2547f8419e
-      size: 7114
+      md5: 650fdaa8074691ed6c945f830c0f80a7
+      size: 1966
     - path: src/train.py
       hash: md5
-      md5: b3a6dc65710f87c6ad4403ce8f6b7e46
-      size: 8179
+      md5: 15a900dabb2c060ddf01c0bcdeac8595
+      size: 6329
     - path: src/utils.py
       hash: md5
-      md5: 16e540cfc68a4a5c88f582f7c7b36756
-      size: 6612
+      md5: 9a9c7989fea027f4454c3b53104125cd
+      size: 4844
     params:
       params.yaml:
         augmentation:
@@ -40,17 +40,12 @@ stages:
           - -0.05
           - 0.05
           rotation_degrees: 10
-          horizontal_flip: false
-          vertical_flip: false
-          mixup_alpha: 0.0
-          cutmix_alpha: 0.0
-          apply_mixup_cutmix_prob: 0.0
+          random_resized_crop: true
         data:
           batch_size: 8
           img_size: 224
           num_classes: 6
         loss:
-          use_focal_loss: false
           label_smoothing: 0.05
         model:
           name: efficientnet_b0
@@ -75,20 +70,20 @@ stages:
     outs:
     - path: metrics/train_metrics.json
       hash: md5
-      md5: 7153707edadd676f489e247760b3e4eb
-      size: 230
+      md5: a050fd35a884110f762b400f0baf99c2
+      size: 228
     - path: models/best_model.pth
       hash: md5
-      md5: 864a967f4ca59d5ec2cfbdc16e7cdd26
-      size: 56496349
+      md5: 1127b59a46f12c72fe210c3e9d9f2572
+      size: 56496157
     - path: models/training_history.pth
       hash: md5
-      md5: 8c36e6e06bc790ce6a328e9aead88037
-      size: 3363
+      md5: 1c18cc08200f31704c6e109c17bbb56b
+      size: 3235
     - path: plots/training_history.png
       hash: md5
-      md5: 70707b630e145759ae802ec7525adccb
-      size: 261617
+      md5: 55748c87ab9f1f0ff9e31f3254b64da6
+      size: 264389
   evaluate:
     cmd: python src/evaluate.py --model models/best_model.pth
     deps:

@@ -14,15 +14,9 @@ augmentation:
   saturation_range: [0.9, 1.1]
   hue_range: [-0.05, 0.05]
   rotation_degrees: 10
-  horizontal_flip: false
-  vertical_flip: false
-
-  mixup_alpha: 0.0
-  cutmix_alpha: 0.0
-  apply_mixup_cutmix_prob: 0.0
+  random_resized_crop: true
 
 loss:
-  use_focal_loss: false
   label_smoothing: 0.05
 
 training:
