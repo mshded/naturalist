@@ -68,7 +68,7 @@ if uploaded_file is not None:
         st.error("Model not loaded. Please check if best_model.pth exists in models/ folder.")
     else:
         image = Image.open(uploaded_file).convert("RGB")
-        st.image(image, caption="Uploaded image", use_container_width=True)
+        st.image(image, caption="Uploaded image", width=400)
 
         x = transform(image).unsqueeze(0).to(device)
 
