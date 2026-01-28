@@ -33,13 +33,11 @@ def load_model():
         freeze_backbone=False,
         model_name='efficientnet_b0'
     )
-
-checkpoint = torch.load(BASE_DIR / "models" / "best_model.pth", map_location=device)
-
-model.load_state_dict(checkpoint["model_state_dict"])
-model.to(device)
-model.eval()
-return model
+    checkpoint = torch.load(BASE_DIR / "models" / "best_model.pth", map_location=device)
+    model.load_state_dict(checkpoint["model_state_dict"])
+    model.to(device)
+    model.eval()
+    return model
 
 model = load_model()
 
