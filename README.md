@@ -19,7 +19,7 @@
 - **test images/** — изображения для тестирования  
 - **01_explore_inaturalist/** — парсинг данных с iNaturalist
 
-- ## Быстрый старт через Docker
+## Быстрый старт через Docker
 
 1. Построить Docker-образ проекта:
 
@@ -35,8 +35,8 @@ docker run -p 8501:8501 naturalist
 
 http://localhost:8501
 
-- ## ВЕБ-ПРИЛОЖЕНИЕ
+## ВЕБ-ПРИЛОЖЕНИЕ
 - `app.py`
-- https://swan-classifier.streamlit.app/
+  https://swan-classifier.streamlit.app/
 
 
