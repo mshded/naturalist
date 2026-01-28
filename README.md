@@ -35,5 +35,8 @@ docker run -p 8501:8501 naturalist
 
 http://localhost:8501
 
+- ## ВЕБ-ПРИЛОЖЕНИЕ
+- `app.py`
+- https://swan-classifier.streamlit.app/
 
 
