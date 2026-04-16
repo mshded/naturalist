@@ -1,9 +1,52 @@
-# Naturalist Project 
- 
-## Swan species-classifier  
- 
-## Compose  
-- `data/` -  
-- `src/` -  
-- `notebooks/` -  
-- `models/` - 
+# Naturalist
+
+Классификация видов лебедей по изображениям.
+
+## Запуск
+
+Установка зависимостей:
+
+```bash
+pip install -r requirements.txt
+```
+
+Обучение модели:
+
+```bash
+python src/train.py --config params.yaml
+```
+
+Оценка обученной модели:
+
+```bash
+python src/evaluate.py --model models/best_model.pth --config params.yaml
+```
+
+Запуск полного пайплайна через DVC:
+
+```bash
+dvc repro
+```
+## Описание файлов
+
+### Notebooks
+
+- `01_explore_inaturalist.ipynb` — разведочный анализ данных и просмотр изображений.
+- `02_train_swan_classifier.ipynb` — обучение модели и эксперименты в формате ноутбука.
+
+### src
+
+- `data.py` — загрузка датасета, преобразования изображений и подготовка `DataLoader`.
+- `models.py` — определение архитектур моделей для классификации.
+- `train.py` — основной скрипт обучения модели.
+- `evaluate.py` — оценка модели на тестовом наборе и сохранение метрик.
+- `utils.py` — вспомогательные функции для обучения, валидации, визуализации и сохранения результатов.
+- `web.py` — заготовка под веб-интерфейс.
+
+## Артефакты
+
+После обучения и оценки сохраняются:
+
+- `models/` — веса модели и история обучения
+- `metrics/` — метрики
+- `plots/` — графики обучения и confusion matrix
